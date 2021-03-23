@@ -1,0 +1,61 @@
+﻿@model CoodeSimpleCRUD.Models.Product
+<td>
+    <center>
+        <img src="@Model.ImageUrl " width="40" height="40" />
+    </center>
+</td>
+<td>
+    @Html.DisplayFor(modelItem => Model.Code)
+</td>
+<td>
+    @Html.DisplayFor(modelItem => Model.Name)
+</td>
+<td>
+    @Html.DisplayFor(modelItem => Model.Description)
+</td>
+<td>
+    @Html.DisplayFor(modelItem => Model.Category)
+</td>
+<td>
+    @Html.DisplayFor(modelItem => Model.Cost)
+</td>
+<td>
+    @Html.DisplayFor(modelItem => Model.Price)
+</td>
+<td>
+    <div class="btn-group">
+        @*<a asp-action="Edit" asp-route-id="@Model.Code" class="btn-sm btn-info">Edit</a>*@
+        
+        <form asp-action="EditProduct" asp-route-id="@Model.Code"
+              data-ajax="true"
+              data-ajax-update="#DivDetailView"
+              data-ajax-success="ShowDetailForm()">
+            <button type="submit" class="btn btn-sm btn-info ml-1">
+                Edit
+            </button>
+        </form>
+
+        @*<a asp-action="Details" asp-route-id="@Model.Code" class="btn-sm btn-primary ml-1">Details</a>*@
+
+        <form asp-action="ViewProduct" asp-route-id="@Model.Code"
+              data-ajax="true"
+              data-ajax-update="#DivDetailView"
+              data-ajax-success="ShowDetailForm()">
+            <button type="submit" class="btn btn-sm btn-primary ml-1">
+                Details
+            </button>
+        </form>
+
+        <form asp-action="DeleteProduct" asp-route-id="@Model.Code"
+              data-ajax="true" data-ajax-success="deleteItem(this)">
+            <button type="submit" class="btn btn-sm btn-danger ml-1"
+                    onclick="return confirm('Delete Confirmation for Product @Model.Code');">
+                Delete
+            </button>
+        </form>
+    </div>
+    @*Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+        @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+        @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })*@
+</td>
+
